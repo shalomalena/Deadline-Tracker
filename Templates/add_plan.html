@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add Plan</title>
+    <!-- Bulma CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.2/css/bulma.min.css"
+    />
+    <script>
+      function toggleCustomDays() {
+        var frequency = document.getElementById("frequency").value;
+        var customDaysSection = document.getElementById("customDaysSection");
+        if (frequency === "custom") {
+          customDaysSection.style.display = "block";
+        } else {
+          customDaysSection.style.display = "none";
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Add a Plan for {{ deadline.company_name }}</h1>
+        <p>You have {{ days_left }} days to work on this application.</p>
+
+        <!-- Form for Adding a Plan -->
+        <form method="POST">
+          <div class="field">
+            <label class="label">When are you planning to start?</label>
+            <div class="control">
+              <input class="input" type="date" name="start_date" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">When are you planning to submit?</label>
+            <div class="control">
+              <input class="input" type="date" name="submit_date" required />
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">How often do you want to work?</label>
+            <div class="control">
+              <div class="select">
+                <select
+                  name="frequency"
+                  id="frequency"
+                  onchange="toggleCustomDays()"
+                  required
+                >
+                  <option value="daily">Daily</option>
+                  <option value="every_two_days">Every Two Days</option>
+                  <option value="weekends">On Weekends</option>
+                  <option value="custom">Customize</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Custom Days Selection (Visible only if "custom" is selected) -->
+          <div id="customDaysSection" style="display: none">
+            <label class="label"
+              >Select the specific days you want to work on:</label
+            >
+            <div class="field is-grouped is-grouped-multiline">
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="custom_days" value="Monday" />
+                  Monday
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="custom_days" value="Tuesday" />
+                  Tuesday
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="custom_days" value="Wednesday" />
+                  Wednesday
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="custom_days" value="Thursday" />
+                  Thursday
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="custom_days" value="Friday" />
+                  Friday
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="custom_days" value="Saturday" />
+                  Saturday
+                </label>
+              </div>
+              <div class="control">
+                <label class="checkbox">
+                  <input type="checkbox" name="custom_days" value="Sunday" />
+                  Sunday
+                </label>
+              </div>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label">How many hours per day?</label>
+            <div class="control">
+              <input
+                class="input"
+                type="number"
+                name="hours"
+                min="1"
+                required
+              />
+            </div>
+          </div>
+
+          <div class="control">
+            <button class="button is-primary" type="submit">Submit Plan</button>
+          </div>
+        </form>
+
+        <a href="/my-plan" class="button is-light">Go Back</a>
+      </div>
+    </section>
+  </body>
+</html>

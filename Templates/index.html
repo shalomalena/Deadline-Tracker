@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Internship Tracker</title>
+    <!-- Bulma CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.2/css/bulma.min.css"
+    />
+    <!-- FontAwesome CSS -->
+    <link
+      href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+      rel="stylesheet"
+      integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN"
+      crossorigin="anonymous"
+    />
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/static/styles.css" />
+  </head>
+
+  <body>
+    <!-- Navbar -->
+    <nav class="navbar">
+      <div class="container">
+        <div class="navbar-brand">
+          <a class="navbar-item" href="/">
+            <strong>Tracker</strong>
+          </a>
+        </div>
+        <div class="navbar-end">
+          <a
+            href="/view-deadlines"
+            class="navbar-item is-size-5 has-text-weight-semibold"
+            >View Deadline</a
+          >
+          <a
+            href="/add-deadline"
+            class="navbar-item is-size-5 has-text-weight-semibold"
+            >Add Deadline</a
+          >
+          <a
+            href="/my-plan"
+            class="navbar-item is-size-5 has-text-weight-semibold"
+            >My Plan</a
+          >
+          <a
+          href="/submitted-applications"
+          class="navbar-item is-size-5 has-text-weight-semibold"
+        >Submitted</a>
+        
+      </div>
+    </nav>
+
+    <section class="section">
+      <div class="container">
+        <h2 class="title">Your To-Do List for Applications</h2>
+    
+        {% if todos %}
+        <form method="POST" action="{{ url_for('update_todo') }}">
+          <table class="table is-fullwidth is-striped">
+            <thead>
+              <tr>
+                <th>Mark as Complete</th>
+                <th>Date</th>
+                <th>Company/Program</th>
+                <th>Hours</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for todo in todos %}
+              <tr>
+                <td>
+                  <input type="checkbox" name="completed" value="{{ loop.index0 }}">
+                </td>
+                <td>{{ todo.date.strftime('%Y-%m-%d') }}</td>
+                <td>{{ todo.company_name }}</td>
+                <td>{{ todo.hours }} hours</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+    
+          <button class="button is-primary" type="submit">Update To-Do List</button>
+        </form>
+        {% else %}
+        <p>No tasks available. Please add a plan for your applications.</p>
+        {% endif %}
+      </div>
+    </section>
+    
+
+    <!-- Bulma & FontAwesome JS -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </body>
+</html>

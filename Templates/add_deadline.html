@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Add Deadline</title>
+    <!-- Bulma CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.2/css/bulma.min.css"
+    />
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Add New Deadline</h1>
+
+        <!-- Form for Adding Deadline -->
+        <form method="POST" action="/add-deadline">
+          <!-- Application Type Dropdown -->
+          <div class="field">
+            <label class="label">Application Type</label>
+            <div class="control">
+              <div class="select">
+                <select name="application_type" required>
+                  <option value="" disabled selected>Select type</option>
+                  <option value="internship">Internship</option>
+                  <option value="scholarship">Scholarship</option>
+                  <option value="fellowship">Fellowship</option>
+                  <option value="research">Research</option>
+                  <option value="other">Other</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Company/Program Name (Required) -->
+          <div class="field">
+            <label class="label">Company/Program Name (Required)</label>
+            <div class="control">
+              <input
+                class="input"
+                type="text"
+                name="company_name"
+                placeholder="Enter company or program name"
+                required
+              />
+            </div>
+          </div>
+
+          <!-- Deadline (Required) -->
+          <div class="field">
+            <label class="label">Deadline (Required)</label>
+            <div class="control">
+              <input class="input" type="date" name="deadline" required />
+            </div>
+          </div>
+
+          <!-- Link (Optional) -->
+          <div class="field">
+            <label class="label">Link (Optional)</label>
+            <div class="control">
+              <input
+                class="input"
+                type="url"
+                name="link"
+                placeholder="Enter link to the program or job posting"
+              />
+            </div>
+          </div>
+
+          <!-- Description (Optional) -->
+          <div class="field">
+            <label class="label">Description (Optional)</label>
+            <div class="control">
+              <textarea
+                class="textarea"
+                name="description"
+                placeholder="Enter a description"
+              ></textarea>
+            </div>
+          </div>
+
+          <!-- Status Dropdown -->
+          <div class="field">
+            <label class="label">Status</label>
+            <div class="control">
+              <div class="select">
+                <select name="status" required>
+                  <option value="not_started">Not Started</option>
+                  <option value="in_progress">In Progress</option>
+                  <option value="submitted">Submitted</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- Submit Button -->
+          <div class="control">
+            <button class="button is-primary" type="submit">Submit</button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- Bulma & FontAwesome JS -->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </body>
+</html>

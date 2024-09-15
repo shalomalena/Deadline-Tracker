@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Submitted Applications</title>
+    <!-- Bulma CSS -->
+    <link
+      rel="stylesheet"
+      href="https://unpkg.com/bulma@0.9.2/css/bulma.min.css"
+    />
+  </head>
+
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Submitted Applications</h1>
+
+        <table class="table is-fullwidth is-striped">
+          <thead>
+            <tr>
+              <th>Company/Program</th>
+              <th>Deadline</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for app in applications %}
+            <tr>
+              <td>{{ app.company_name }}</td>
+              <td>{{ app.deadline.strftime('%Y-%m-%d') }}</td>
+              <td>{{ app.status }}</td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+
+        <a href="/" class="button is-primary">Go Back to Home</a>
+      </div>
+    </section>
+  </body>
+</html>

@@ -1,0 +1,27 @@
+body,
+html {
+  margin: 0;
+  padding: 0;
+  background-color: #f4ecf2; /* Set green background for the whole page */
+}
+
+.section {
+  padding-top: 2em;
+  padding-bottom: 2em;
+  background-color: #f7eef6; /* Green background for the main content */
+}
+
+.container {
+  text-align: center;
+  color: white; /* Text color to contrast with the green background */
+}
+
+.title {
+  font-size: 2em;
+  color: rgb(69, 56, 69); /* Title color to match the new background */
+}
+
+p {
+  font-size: 1.2em;
+  color: rgb(16, 15, 15); /* Paragraph color to match the new background */
+}
