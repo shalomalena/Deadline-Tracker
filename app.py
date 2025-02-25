@@ -3,19 +3,18 @@ from datetime import datetime, timedelta
 
 app = Flask(__name__)
 
-# In-memory storage for deadlines (can be replaced with a database)
+
 deadlines = []
 
-# Global variable to hold todos
 todos = []
 
 @app.route('/')
 def index():
-    # Reset or recalculate the to-do list here based on deadlines
+    
     today = datetime.today()
 
-    # Clear the global `todos` list and regenerate tasks based on the deadlines
-    todos.clear()  # Ensure it's updated every time we render the page
+   
+    todos.clear()  
     for deadline in deadlines:
         if 'plan' in deadline and deadline['plan'] is not None:
             plan = deadline['plan']
@@ -63,7 +62,7 @@ def index():
 @app.route('/update-todo', methods=['POST'])
 
 def update_todo():
-    global todos  # Ensure we use the global todos list
+    global todos  
 
     # Get the indices of the tasks that were marked as completed
     completed_tasks = request.form.getlist('completed')
@@ -71,14 +70,14 @@ def update_todo():
     # Convert indices to integers and remove them from the to-do list
     for completed in completed_tasks:
         index = int(completed)
-        if index < len(todos):  # Ensure the index is within bounds
+        if index < len(todos): 
             todos.pop(index)
 
     return redirect(url_for('index'))
 
     
 
-# Add Deadline Route
+# Add Deadline
 @app.route('/add-deadline', methods=['GET', 'POST'])
 def add_deadline():
     if request.method == 'POST':
@@ -98,22 +97,22 @@ def add_deadline():
             'link': link,
             'description': description,
             'status': status,
-            'plan': None  # Plan starts as None, to be added later
+            'plan': None  
         })
 
-        # Redirect to the view deadline page
+      
         return redirect(url_for('view_deadlines'))
 
     return render_template('add_deadline.html')
 
-# View Deadlines Route
+# View Deadlines 
 @app.route('/view-deadlines')
 def view_deadlines():
     # Sort deadlines by date (earliest at the top)
     active_deadlines = [deadline for deadline in deadlines if deadline['status'] != 'Submitted']
     return render_template('view_deadlines.html', deadlines=active_deadlines)
 
-# Route to mark an application as submitted
+
 
 @app.route('/submit-application/<int:index>', methods=['POST'])
 def submit_application(index):
@@ -128,7 +127,7 @@ def submit_application(index):
     return redirect(url_for('view_deadlines'))
 
 
-# Route for viewing submitted applications
+#  viewing submitted applications
 
 @app.route('/submitted-applications')
 def submitted_applications():
@@ -138,7 +137,7 @@ def submitted_applications():
 
 
 
-# Route for viewing applications in the My Plan section
+#  viewing applications in the My Plan section
 @app.route('/my-plan')
 def my_plan():
     # Show the list of applications without plans
@@ -146,7 +145,7 @@ def my_plan():
     return render_template('my_plan.html', deadlines=active_plans)
     
 
-# Route for adding a plan to an application
+# adding a plan to an application
 @app.route('/add-plan/<int:index>', methods=['GET', 'POST'], endpoint='add_plan_with_index')
 def add_plan_with_index(index):
     deadline = deadlines[index]
@@ -177,7 +176,7 @@ def add_plan_with_index(index):
 
 
 
-# Another route to add a plan (if this is a different one, you can clarify its purpose)
+# to add a plan (if this is a different one, you can clarify its purpose)
 @app.route('/add-plan-simple/<int:index>', methods=['GET', 'POST'])
 def add_plan_simple(index):
     if request.method == 'POST':
